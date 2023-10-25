@@ -1,4 +1,5 @@
 <template>
-    Hola mundo desde index
+    Hola Mundo
 </template>
-<script></script>
+<script>
+</script>
