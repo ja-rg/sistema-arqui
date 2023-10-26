@@ -62,20 +62,20 @@
                     <div>
                         <h4 class="font-semibold mb-3">Síguenos:</h4>
                         <div class="flex space-x-4">
-                            <a href="#" aria-label="Facebook" class="hover:text-blue-400"><i
-                                    class="fab fa-facebook"></i></a>
-                            <a href="#" aria-label="Twitter" class="hover:text-blue-400"><i class="fab fa-twitter"></i></a>
-                            <a href="#" aria-label="LinkedIn" class="hover:text-blue-400"><i
-                                    class="fab fa-linkedin"></i></a>
-                            <a href="#" aria-label="Instagram" class="hover:text-blue-400"><i
-                                    class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-facebook"></i>
+                                Facebook</a>
+                            <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-twitter"></i> Twitter</a>
+                            <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-instagram"></i>
+                                Instagram</a>
+                            <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-linkedin"></i>
+                                LinkedIn</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Copyright -->
                 <div class="text-center mt-8">
-                    &copy; 2023 Cyber-Security. Todos los derechos reservados.
+                    &copy; {{ new Date().getFullYear() }} Cyber-Security. Todos los derechos reservados.
                 </div>
             </div>
         </footer>
@@ -91,22 +91,22 @@ export default {
                 {
                     name: "Joel Valencia González",
                     position: "Frontend Developer",
-                    image: "/path/to/alice.jpg" // Change to actual path of your image
+                    image: "https://www.prisonart.com.mx/wp-content/uploads/2016/08/dummy-prod-1-1.jpg" // Change to actual path of your image
                 },
                 {
                     name: "Ana Fernanda Ramírez Olmos",
                     position: "Backend Developer",
-                    image: "/path/to/bob.jpg" // Change to actual path of your image
+                    image: "https://www.prisonart.com.mx/wp-content/uploads/2016/08/dummy-prod-1-1.jpg" // Change to actual path of your image
                 },
                 {
                     name: "Jesús Alejandro Rosales González",
                     position: "Principal Architect",
-                    image: "/path/to/carol.jpg" // Change to actual path of your image
+                    image: "https://www.prisonart.com.mx/wp-content/uploads/2016/08/dummy-prod-1-1.jpg" // Change to actual path of your image
                 },
                 {
                     name: "Oscar Palomares Vargas",
                     position: "Backend Developer",
-                    image: "/path/to/carol.jpg" // Change to actual path of your image
+                    image: "https://www.prisonart.com.mx/wp-content/uploads/2016/08/dummy-prod-1-1.jpg" // Change to actual path of your image
                 },
 
             ]
