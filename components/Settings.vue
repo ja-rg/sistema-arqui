@@ -67,5 +67,10 @@ const toggleCamera = async (setting: Settings) => {
   }
 
   isLoading.value = false;
+
+  setTimeout(() => {
+    isSuccess.value = false;
+    activeSetting.value = null;
+  }, 2000)
 }
 </script>
