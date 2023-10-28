@@ -6,6 +6,9 @@
             <nav class="flex gap-4 mt-4">
                 <NuxtLink to="/">Home</NuxtLink>
                 <NuxtLink to="/app">App</NuxtLink>
+                <NuxtLink to="/identification">
+                    Identificación de sospechosos
+                </NuxtLink>
             </nav>
         </header>
 
@@ -21,7 +24,7 @@
                 <ul class="flex flex-wrap justify-between gap-1 mb-6">
                     <li v-for="member in teamMembers" :key="member.name" class="mb-4 w-full sm:w-1/2 lg:w-1/4">
                         <div class="bg-blue-700 rounded-lg p-4 hover:bg-blue-600 transition">
-                            <img :src="member.image" alt="" class="mb-2 w-24 h-24 rounded-full mx-auto">
+                            <img :src="member.image_url" alt="" class="mb-2 w-24 h-24 rounded-full mx-auto">
                             <h3 class="text-xl text-center">{{ member.name }}</h3>
                             <p class="text-center text-blue-300">{{ member.position }}</p>
                         </div>
@@ -83,34 +86,13 @@
 </template>
   
   
-<script>
-export default {
-    data() {
-        return {
-            teamMembers: [
-                {
-                    name: "Joel Valencia González",
-                    position: "Frontend Developer",
-                    image: "https://www.prisonart.com.mx/wp-content/uploads/2016/08/dummy-prod-1-1.jpg" // Change to actual path of your image
-                },
-                {
-                    name: "Ana Fernanda Ramírez Olmos",
-                    position: "Backend Developer",
-                    image: "https://www.prisonart.com.mx/wp-content/uploads/2016/08/dummy-prod-1-1.jpg" // Change to actual path of your image
-                },
-                {
-                    name: "Jesús Alejandro Rosales González",
-                    position: "Principal Architect",
-                    image: "https://www.prisonart.com.mx/wp-content/uploads/2016/08/dummy-prod-1-1.jpg" // Change to actual path of your image
-                },
-                {
-                    name: "Oscar Palomares Vargas",
-                    position: "Backend Developer",
-                    image: "https://www.prisonart.com.mx/wp-content/uploads/2016/08/dummy-prod-1-1.jpg" // Change to actual path of your image
-                },
-
-            ]
-        }
-    }
+<script setup lang="ts">
+type TeamMember = {
+    member_id: number;
+    name: string;
+    position: string;
+    image_url: string;
 }
+
+const teamMembers = useFetch<TeamMember[]>('http://main.brazilsouth.cloudapp.azure.com:8000/team_members').data;
 </script> 

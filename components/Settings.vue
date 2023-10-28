@@ -24,7 +24,8 @@
         successfully!</div>
       <div class="mt-6 flex items-center justify-start">
         <button @click="toggleCamera(setting)"
-          class="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 transition">
+          class="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 transition"
+          :disabled="isLoading && activeSetting === setting.setting_id">
           Toggle Camera {{ setting.camera_status ? '(On)' : '(Off)' }}
         </button>
       </div>
@@ -51,22 +52,21 @@ const toggleCamera = async (setting: Settings) => {
   isLoading.value = true;
   activeSetting.value = setting.setting_id;
 
-  const response = await fetch(`http://main.brazilsouth.cloudapp.azure.com:8000/settings?setting_id=eq.${setting.setting_id}`, {
+  const response = await useFetch(`http://main.brazilsouth.cloudapp.azure.com:8000/settings?setting_id=eq.${setting.setting_id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
+    body: {
       camera_status: !setting.camera_status,
-    })
-  })
-
-  if (response.ok) {
-    isSuccess.value = true;
-    setting.camera_status = !setting.camera_status;
-  }
-
-  isLoading.value = false;
+    },
+    onRequestError: (error) => {
+      console.error(error);
+    },
+    onResponse: (response) => {
+      isSuccess.value = true;
+    }
+  });
 
   setTimeout(() => {
     isSuccess.value = false;
