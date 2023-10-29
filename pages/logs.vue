@@ -14,9 +14,9 @@
 </template>
 
 <script setup>
-const logs = []
+const logs = ref([])
 try {
-    const response = useFetch('main.brazilsouth.cloudapp.azure.com:8000/log_server').data
+    logs.value = useFetch('main.brazilsouth.cloudapp.azure.com:8000/log_server').data
 } catch (error) {
     console.error('Error fetching logs:', error);
 }
