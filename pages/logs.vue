@@ -23,8 +23,6 @@ try {
 }
 </script>
 
-/* pages/logs.vue styles */
-
 <style scoped>
 .page-container {
     background-color: #121212;
