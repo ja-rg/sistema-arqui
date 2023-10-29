@@ -5,7 +5,7 @@
             <div class="flex justify-between">
                 <div>
                     <Icon class="text-green-500 mr-2" name="carbon:checkmark-filled" size="20" />
-                    {{ log.nombre }}
+                    {{ log.mensaje }}
                 </div>
                 <span>{{ log.created_at }}</span>
             </div>
