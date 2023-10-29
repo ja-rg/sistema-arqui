@@ -1,6 +1,5 @@
 <template>
     <div class="flex flex-col min-h-screen">
-
         <header class="bg-blue-600 text-white p-4">
             <h1 class="text-2xl">Cyber-Security</h1>
             <nav class="flex gap-4 mt-4">
@@ -11,7 +10,7 @@
                 </NuxtLink>
             </nav>
         </header>
-
+        
         <main class="container mx-auto px-4 flex-grow bg-gray-100 p-6 space-y-6 gap-6">
             <slot />
         </main>
@@ -65,13 +64,22 @@
                     <div>
                         <h4 class="font-semibold mb-3">Síguenos:</h4>
                         <div class="flex space-x-4">
-                            <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-facebook"></i>
-                                Facebook</a>
-                            <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-twitter"></i> Twitter</a>
-                            <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-instagram"></i>
-                                Instagram</a>
-                            <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-linkedin"></i>
-                                LinkedIn</a>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center space-x-2">
+                                <Icon name="carbon:logo-facebook" class="w-6 h-6" />
+                                <span>Facebook</span>
+                            </a>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center space-x-2">
+                                <Icon name="carbon:logo-twitter" class="w-6 h-6" />
+                                <span>Twitter</span>
+                            </a>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center space-x-2">
+                                <Icon name="carbon:logo-instagram" class="w-6 h-6" />
+                                <span>Instagram</span>
+                            </a>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 flex items-center space-x-2">
+                                <Icon name="carbon:logo-linkedin" class="w-6 h-6" />
+                                <span>LinkedIn</span>
+                            </a>
                         </div>
                     </div>
                 </div>

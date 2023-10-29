@@ -8,7 +8,7 @@
         class="bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition flex justify-between items-center">
         <span class="flex items-center space-x-2">
           <i class="fas fa-user-circle text-blue-400"></i> <!-- An icon for user -->
-          <font-awesome-icon :icon="['fas', 'user-circle']" class="text-blue-400" />
+          <Icon name="carbon:user-avatar-filled-alt" class="text-blue-400 w-6 h-6" />
           <span>{{ user.username }}</span>
         </span>
         <span class="bg-blue-500 text-white px-2 py-1 rounded text-xs">{{ user.role }}</span>
