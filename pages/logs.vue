@@ -14,6 +14,7 @@
 </template>
 
 <script setup>
+import axios from 'axios';
 const logs = []
 try {
     const response = await axios.get('main.brazilsouth.cloudapp.azure.com:8000/log_server');
