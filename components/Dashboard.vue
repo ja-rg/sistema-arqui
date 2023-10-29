@@ -13,7 +13,7 @@ const { data: alerts } = await useFetch<Alert[]>('http://main.brazilsouth.clouda
     <h1 class="text-2xl font-semibold mb-4 border-b pb-2">Dashboard</h1>
 
     <div class="camera-feed mt-6 relative rounded-lg overflow-hidden">
-      <img src="https://media2.giphy.com/media/P9iws4imseYNg5KkhQ/giphy.gif" alt="Camera Feed" class="w-full">
+      <NuxtImg src="https://media2.giphy.com/media/P9iws4imseYNg5KkhQ/giphy.gif" alt="Camera Feed" class="w-full" />
       <div class="absolute top-0 left-0 p-3 transition-transform duration-300">
         <p class="text-xs bg-black bg-opacity-50 py-1 px-2 rounded">Live Feed</p>
       </div>

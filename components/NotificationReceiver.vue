@@ -1,16 +1,20 @@
 <template>
-    <div class="bg-gray-100 min-h-screen p-8">
-        <h1 class="text-4xl font-semibold mb-6">Cybersecurity Notifications</h1>
-        <div v-if="notification" class="bg-red-500 text-white p-6 rounded-lg shadow-md">
-            <div class="flex items-center space-x-4">
-                <Icon name="carbon:warning-alt-inverted-filled" class="w-10 h-10" />
+    <div class="bg-gray-100 min-h-screen p-4 sm:p-8">
+        <h1 class="text-2xl sm:text-4xl font-semibold mb-4 sm:mb-6">Cybersecurity Notifications</h1>
+
+        <div v-if="notification" class="bg-red-500 text-white p-4 sm:p-6 rounded-lg shadow-md">
+            <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <Icon name="carbon:warning-alt-inverted-filled" class="w-8 sm:w-10 h-8 sm:h-10" />
+
+                <NuxtImg :src="notification.imagen_url" alt="Sospechoso"
+                    class="w-20 sm:w-24 h-20 sm:h-24 rounded-full object-cover object-center mb-2 sm:mb-0" />
+
                 <div>
-                    <NuxtImg :src="notification.imagen_url" alt="Sospechoso"
-                        class="w-24 h-24 rounded-full object-cover object-center" />
-                    <h3 class="font-semibold text-xl">Threat Detected!</h3>
+                    <h3 class="font-semibold text-lg sm:text-xl">Threat Detected!</h3>
                     <p>{{ notification.nombre }} at {{ notification.ultima_deteccion }}</p>
                 </div>
             </div>
+
             <button @click="dismissNotification" class="mt-4 text-white hover:text-red-300">Dismiss</button>
         </div>
     </div>
