@@ -18,17 +18,28 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import md5 from 'md5';
 
 const username = ref('');
 const password = ref('');
 const emit = defineEmits(['login-success']);
 
 function authenticate() {
+    type User = {
+        user_id: string;
+        username: string;
+        email: string;
+        password: string;
+        role: string;
+    }
+
     // Authentication logic here
-    if (username.value === 'admin' && password.value === 'pass') {
-        emit('login-success');
-    } else {
+    const { data } = useFetch<User[]>(`http://main.brazilsouth.cloudapp.azure.com:8000/users?username=eq.${username.value}&password=eq.${md5(password.value)}`)!
+    if (!data.value || data.value.length === 0) {
         alert('Incorrect credentials!');
+    } else {
+        emit('login-success');
+        console.log(md5('admin'));
     }
 }
 </script>

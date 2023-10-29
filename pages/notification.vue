@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Authentication v-if="!authenticated" @login-success="showNotifications" />
-        <Notifications v-if="authenticated" />
+        <Authenticate v-if="!authenticated" @login-success="showNotifications" />
+        <NotificationReceiver v-if="authenticated" />
     </div>
 </template>
   
