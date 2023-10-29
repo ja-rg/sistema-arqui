@@ -13,13 +13,15 @@
     </div>
 </template>
 
-<script setup>
-const logs = ref([])
-try {
-    logs.value = useFetch('main.brazilsouth.cloudapp.azure.com:8000/log_server').data
-} catch (error) {
-    console.error('Error fetching logs:', error);
+<script setup lang="ts">
+type Log = {
+    id: number;
+    mensaje: string;
+    created_at: string;
 }
+
+const { data } = useFetch<Array<Log>>('main.brazilsouth.cloudapp.azure.com:8000/log_server')
+const logs = data.value
 </script>
 
 <style scoped>
