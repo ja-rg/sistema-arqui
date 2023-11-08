@@ -11,7 +11,7 @@
             </nav>
         </header>
         
-        <main class="container mx-auto px-4 flex-grow bg-gray-100 p-6 space-y-6 gap-6">
+        <main class="container mx-auto px-4 flex-grow bg-gray-100 p-6 space-y-6 gap-6 min-h-screen">
             <slot />
         </main>
 
