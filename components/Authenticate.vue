@@ -36,7 +36,9 @@ function authenticate() {
     // Authentication logic here
     const { data } = useFetch<User[]>(`http://main.brazilsouth.cloudapp.azure.com:8000/users?username=eq.${username.value}&password=eq.${password.value}`)!
     if (!data.value || data.value.length === 0) {
-        alert('Incorrect credentials!');
+        alert('Incorrect credentials!!');
+        console.log(`Username: ${username.value}, Password: ${password.value}`, data.value);
+        
     } else {
         emit('login-success');
         console.log(md5('admin'));
