@@ -1,29 +1,29 @@
 <template>
-    <div class="bg-gray-200 min-h-screen p-8">
-        <h1 class="text-4xl font-semibold mb-6">Identificación de sospechosos</h1>
+    <div class="bg-gray-100 min-h-screen p-8">
+        <h1 class="text-4xl font-bold mb-6 text-gray-800">Identificación de sospechosos</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div v-for="sospechoso in sospechosos" :key="sospechoso.sospechosos_id"
-                class="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow duration-300">
-
-                <div class="flex items-center space-x-6">
-                    <NuxtImg :src="sospechoso.imagen_url" alt="Sospechoso"
-                        class="w-24 h-24 rounded-full object-cover object-center" />
-
-                    <div>
-                        <p class="text-xl font-medium">{{ sospechoso.nombre }}</p>
-                        <p class="text-sm text-gray-500 mt-1">Visto por última vez: {{
-                            formatDate(sospechoso.ultima_deteccion) }} a las {{ formatTime(sospechoso.ultima_deteccion) }}
-                        </p>
+            <Suspense>
+                <div v-for="sospechoso in sospechosos" :key="sospechoso.sospechosos_id"
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                    <div class="flex items-center space-x-4">
+                        <NuxtImg :src="sospechoso.imagen_url" alt="Sospechoso"
+                            class="w-20 h-20 rounded-full object-cover border-2 border-gray-300" />
+                        <div>
+                            <p class="text-xl font-semibold text-gray-700">{{ sospechoso.nombre }}</p>
+                            <p class="text-sm text-gray-500 mt-1">Visto por última vez: {{
+                                new Date(sospechoso.ultima_deteccion).toLocaleDateString() }} a las {{ new
+        Date((sospechoso.ultima_deteccion)).toLocaleTimeString() }}
+                            </p>
+                        </div>
+                        <Icon name="carbon:user-avatar-filled-alt" class="text-blue-400 w-6 h-6" />
                     </div>
-
+                    <button @click="socket.emit('notify-official', sospechoso)"
+                        :class="activeButtons[sospechoso.sospechosos_id] ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'"
+                        class="mt-4 text-white rounded px-4 py-2 w-full text-center transition-colors duration-300">
+                        Notificar oficial
+                    </button>
                 </div>
-
-                <button @click="notificar(sospechoso)"
-                    :class="activeButtons[sospechoso.sospechosos_id] ? 'bg-green-600' : 'bg-blue-600'"
-                    class="hover:bg-blue-700 text-white rounded px-4 py-2 w-full text-center transition-colors duration-300">
-                    Notificar oficial
-                </button>
-            </div>
+            </Suspense>
         </div>
     </div>
 </template>
@@ -31,8 +31,6 @@
   
 <script setup lang="ts">
 import io from 'socket.io-client'
-
-
 type Sospechoso = {
     sospechosos_id: number;
     nombre: string;
@@ -40,8 +38,7 @@ type Sospechoso = {
     ultima_deteccion: string;
 }
 
-// Usar useAsyncData o useFetch para obtener datos en tiempo real del backend
-const sospechosos = useFetch<Sospechoso[]>('http://main.brazilsouth.cloudapp.azure.com:8000/sospechosos').data
+const { data: sospechosos } = await useFetch<Sospechoso[]>('http://main.brazilsouth.cloudapp.azure.com:8000/sospechosos')
 const socket = io('http://main.brazilsouth.cloudapp.azure.com:8080/');
 const notificationReceived = ref(false);
 const activeButtons = ref({} as Record<number, boolean>);
@@ -55,21 +52,7 @@ socket.on('official-notification', (message) => {
     setTimeout(() => {
         activeButtons.value[id] = false;
     }, 5000);
-});
-
-function notificar(sospechoso: Sospechoso) {
-    socket.emit('notify-official', sospechoso);
-}
-
-function formatDate(timestamp: string) {
-    const date = new Date(timestamp);
-    return date.toLocaleDateString();
-}
-
-function formatTime(timestamp: string) {
-    const date = new Date(timestamp);
-    return date.toLocaleTimeString();
-}
+})
 
 onUnmounted(() => {
     socket.disconnect();

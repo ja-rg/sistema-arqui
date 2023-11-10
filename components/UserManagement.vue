@@ -10,6 +10,8 @@
           <i class="fas fa-user-circle text-blue-400"></i> <!-- An icon for user -->
           <Icon name="carbon:user-avatar-filled-alt" class="text-blue-400 w-6 h-6" />
           <span>{{ user.username }}</span>
+
+          <span class="text-gray-400">({{ user.email }})</span>
         </span>
         <span class="bg-blue-500 text-white px-2 py-1 rounded text-xs">{{ user.role }}</span>
       </li>
@@ -19,7 +21,7 @@
 </template>
   
 <script setup lang="ts">
-
+import md5 from 'md5';
 // user_id is uuid
 type User = {
   user_id: string

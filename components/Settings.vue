@@ -3,7 +3,7 @@
     <h1 class="text-2xl font-semibold mb-4 border-b pb-2">Settings</h1>
 
     <div v-for="setting in settings" :key="setting.setting_id" class="mt-4">
-      <h2 class="text-xl mb-2">{{ setting.user_id }}</h2>
+      <h2 class="text-xl mb-2">{{ md5(setting.setting_id) }}</h2>
       <div v-if="isLoading && activeSetting === setting.setting_id">
 
         <div role="status">
@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import md5 from 'md5';
 
 type Settings = {
   setting_id: number;
@@ -63,8 +63,10 @@ const toggleCamera = async (setting: Settings) => {
     onRequestError: (error) => {
       console.error(error);
     },
-    onResponse: (response) => {
+    onResponse: () => {
+      isLoading.value = false;
       isSuccess.value = true;
+      setting.camera_status = !setting.camera_status;
     }
   });
 

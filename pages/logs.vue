@@ -1,13 +1,21 @@
 <template>
-    <div class="min-h-screen flex flex-col p-5">
-        <h1 class="text-3xl mb-4">Server Logs</h1>
-        <div v-for="log in logs" :key="log.id" class="mb-2">
-            <div class="flex justify-between">
-                <div>
-                    <Icon class="text-green-500 mr-2" name="carbon:checkmark-filled" size="20" />
-                    {{ log.mensaje }}
+    <div class="bg-gray-900 text-white min-h-screen p-8">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-4xl font-bold mb-8">System Logs</h1>
+            <div class="space-y-6">
+                <div v-for="log in logs" :key="log.id" class="bg-gray-800 p-6 rounded-lg shadow-md">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <Icon name="carbon:terminal" class="w-6 h-6 text-blue-400 mr-4" />
+                            <div>
+                                <p class="font-medium">{{ log.mensaje }}</p>
+                                <p class="text-gray-400 text-sm">{{ new Date(log.created_at).toLocaleString() }}</p>
+                            </div>
+                        </div>
+                        <Icon name="carbon:copy" @click="copyToClipboard(log.mensaje)"
+                            class="w-6 h-6 text-gray-400 hover:text-gray-200 cursor-pointer" />
+                    </div>
                 </div>
-                <span>{{ log.created_at }}</span>
             </div>
         </div>
     </div>
@@ -20,8 +28,10 @@ type Log = {
     created_at: string;
 }
 
-const { data } = useFetch<Array<Log>>('main.brazilsouth.cloudapp.azure.com:8000/log_server')
-const logs = data.value
+const { data: logs } = useFetch<Log[]>('http://main.brazilsouth.cloudapp.azure.com:8000/log_server')
+function copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text)
+}
 </script>
 
 <style scoped>
