@@ -1,49 +1,68 @@
 <template>
     <div class="flex flex-col min-h-screen">
-        <header class="bg-gray-600 text-white p-4">
-            <h1 class="text-2xl">Cyber-Security</h1>
-            <nav class="flex gap-4 mt-4">
-                <NuxtLink to="/">Home</NuxtLink>
-                <NuxtLink to="/monitor">Monitor</NuxtLink>
-                <NuxtLink to="/identification">
-                    Identificación de sospechosos
-                </NuxtLink>
-                <NuxtLink to="/logs">
-                    Registro de actividades
-                </NuxtLink>
-                <NuxtLink to="/model">
-                    Ciudad digital
-                </NuxtLink>
-            </nav>
+        <header class="bg-gray-800 text-white p-4 shadow-lg">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-3xl font-bold tracking-tight">
+                    <NuxtLink to="/" class="hover:text-green-400 transition-colors duration-300">
+                        Cyber-Security
+                    </NuxtLink>
+                </h1>
+                <nav class="flex gap-6">
+                    <NuxtLink to="/" class="py-2 px-3 hover:bg-gray-700 rounded transition-all duration-300">
+                        <Icon name="carbon:home" class="w-6 h-6 mr-2" />
+                        Home
+                    </NuxtLink>
+                    <NuxtLink to="/monitor" class="py-2 px-3 hover:bg-gray-700 rounded transition-all duration-300">
+                        <Icon name="carbon:cloud-monitoring" class="w-6 h-6 mr-2" />
+                        Monitor
+                    </NuxtLink>
+                    <NuxtLink to="/identification" class="py-2 px-3 hover:bg-gray-700 rounded transition-all duration-300">
+                        <Icon name="carbon:face-cool" class="w-6 h-6 mr-2" />
+                        Identificación de sospechosos
+                    </NuxtLink>
+                    <NuxtLink to="/logs" class="py-2 px-3 hover:bg-gray-700 rounded transition-all duration-300">
+                        <Icon name="carbon:terminal" class="w-6 h-6 mr-2" />
+                        Registro de actividades
+                    </NuxtLink>
+                    <NuxtLink to="/model" class="py-2 px-3 hover:bg-gray-700 rounded transition-all duration-300">
+                        <Icon name="carbon:3d-cursor" class="w-6 h-6 mr-2" />
+                        Ciudad digital
+                    </NuxtLink>
+                    <NuxtLink to="/notification" class="py-2 px-3 hover:bg-gray-700 rounded transition-all duration-300">
+                        <Icon name="carbon:notification" class="w-6 h-6 mr-2" />
+                        Notificaciones
+                    </NuxtLink>
+                </nav>
+            </div>
         </header>
 
         <main class="container mx-auto px-4 flex-grow p-6 space-y-6 gap-6 min-h-screen">
             <slot />
         </main>
 
-        <footer class="bg-gray-200">
-            <div class="container mx-auto px-4 py-6 space-y-6">
-                <h2 class="text-2xl font-bold mb-4">Conoce nuestro equipo:</h2>
-                <ul class="flex flex-wrap justify-between gap-1 mb-6">
+        <footer class="bg-gray-800 text-gray-300">
+            <div class="container mx-auto px-4 py-8 space-y-8">
+                <h2 class="text-xl sm:text-2xl font-bold mb-4">Conoce nuestro equipo:</h2>
+                <ul class="flex flex-wrap justify-between gap-4">
                     <li v-for="member in teamMembers" :key="member.name" class="mb-4 w-full sm:w-1/2 lg:w-1/4">
-                        <div class="bg-gray-300 rounded-lg p-4 hover:bg-gray-400 transition-all duration-300">
+                        <div class="bg-gray-700 rounded-lg p-4 hover:bg-gray-600 transition-all duration-300">
                             <NuxtImg :src="member.image_url" alt="" class="mb-2 w-24 h-24 rounded-full mx-auto" />
-                            <h3 class="text-xl text-center">{{ member.name }}</h3>
-                            <p class="text-center text-gray-600">{{ member.position }}</p>
+                            <h3 class="text-lg text-center">{{ member.name }}</h3>
+                            <p class="text-center">{{ member.position }}</p>
                         </div>
                     </li>
                 </ul>
 
                 <!-- Footer Navigation and Info -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
                     <!-- Links -->
                     <div>
                         <h4 class="font-semibold mb-3">Enlaces útiles:</h4>
                         <ul>
-                            <li><a href="#" class="hover:text-gray-400">Términos y condiciones</a></li>
-                            <li><a href="#" class="hover:text-gray-400">Política de privacidad</a></li>
-                            <li><a href="#" class="hover:text-gray-400">FAQ</a></li>
-                            <li><a href="#" class="hover:text-gray-400">Contacto</a></li>
+                            <li><a href="#" class="hover:text-blue-400">Términos y condiciones</a></li>
+                            <li><a href="#" class="hover:text-blue-400">Política de privacidad</a></li>
+                            <li><a href="#" class="hover:text-blue-400">FAQ</a></li>
+                            <li><a href="#" class="hover:text-blue-400">Contacto</a></li>
                         </ul>
                     </div>
 
@@ -68,19 +87,19 @@
                     <div>
                         <h4 class="font-semibold mb-3">Síguenos:</h4>
                         <div class="flex space-x-4">
-                            <a href="#" class="text-gray-400 hover:text-gray-300 flex items-center space-x-2">
+                            <a href="#" class="hover:text-blue-400 flex items-center space-x-2">
                                 <Icon name="carbon:logo-facebook" class="w-6 h-6" />
                                 <span>Facebook</span>
                             </a>
-                            <a href="#" class="text-gray-400 hover:text-gray-300 flex items-center space-x-2">
+                            <a href="#" class="hover:text-blue-400 flex items-center space-x-2">
                                 <Icon name="carbon:logo-twitter" class="w-6 h-6" />
                                 <span>Twitter</span>
                             </a>
-                            <a href="#" class="text-gray-400 hover:text-gray-300 flex items-center space-x-2">
+                            <a href="#" class="hover:text-blue-400 flex items-center space-x-2">
                                 <Icon name="carbon:logo-instagram" class="w-6 h-6" />
                                 <span>Instagram</span>
                             </a>
-                            <a href="#" class="text-gray-400 hover:text-gray-300 flex items-center space-x-2">
+                            <a href="#" class="hover:text-blue-400 flex items-center space-x-2">
                                 <Icon name="carbon:logo-linkedin" class="w-6 h-6" />
                                 <span>LinkedIn</span>
                             </a>
@@ -89,7 +108,7 @@
                 </div>
 
                 <!-- Copyright -->
-                <div class="text-center mt-8">
+                <div class="text-center text-xs">
                     &copy; {{ new Date().getFullYear() }} Cyber-Security. Todos los derechos reservados.
                 </div>
             </div>
