@@ -1,4 +1,5 @@
 <script setup>
+const isModalOpen = ref(false)
 </script>
 
 <template>
@@ -13,9 +14,22 @@
                 <p class="text-xl mb-8">
                     Arquitectura e Ingeniería de Software
                 </p>
-                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded">
+                <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded" @click="isModalOpen = true">
                     Ver más
                 </button>
+
+                <div v-if="isModalOpen" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center">
+                    <div class="p-6 rounded-lg shadow-xl max-w-lg mx-auto">
+                        <h2 class="text-xl font-bold mb-4">Más Información</h2>
+                        <!-- Modal content goes here -->
+                        <p>
+                            Bienvenido a la página de Cyber-Security, en esta página podrás encontrar información sobre el proyecto de Arquitectura e Ingeniería de Software.
+                        </p>
+                        <button @click="isModalOpen = false" class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
 

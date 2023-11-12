@@ -3,8 +3,23 @@ type Alert = {
   alert_id: number;
   message: string;
   alert_timestamp: string;
+  enabled_alert: boolean;
 }
-const { data: alerts } = await useFetch<Alert[]>('http://main.brazilsouth.cloudapp.azure.com:8000/alerts')
+const apiUrl = 'http://main.brazilsouth.cloudapp.azure.com:8000/alerts?enabled_alert=eq.true';
+const { data: alerts, refresh } = await useFetch<Alert[]>(`${apiUrl}&limit=3`);
+
+const disableAlert = async (alertId: number) => {
+  // Make a PATCH request to update the alert's 'enabled_alert' status to false
+  await fetch(`${apiUrl}&alert_id=eq.${alertId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation' // Ask PostgREST to return the modified row
+    },
+    body: JSON.stringify({ enabled_alert: false }),
+  });
+  refresh(); // Refetch the alerts to update the UI
+};
 </script>
 
 <template>
@@ -17,24 +32,45 @@ const { data: alerts } = await useFetch<Alert[]>('http://main.brazilsouth.clouda
       <div class="absolute top-0 left-0 p-3 transition-transform duration-300">
         <p class="text-xs bg-black bg-opacity-50 py-1 px-2 rounded">Live Feed</p>
       </div>
-
     </div>
 
     <div class="alerts mt-6 bg-gray-900 p-4 rounded-lg shadow-md">
-      <h2 class="text-xl font-medium mb-3 text-gray-200 border-b border-gray-700 pb-2">Recent Alerts</h2>
-      <ul class="space-y-3 mt-4">
+      <div class="flex justify-between items-center">
+        <h2 class="text-xl font-medium text-gray-200 border-b border-gray-700 pb-2">
+          Recent Alerts
+          <!-- refresh -->
+          <button @click="refresh" class="text-gray-400 hover:text-gray-200">
+            <Icon name="material-symbols:refresh-rounded" class="w-6 h-6" />
+          </button>
+        </h2>
+      </div>
+
+      <ul class="space-y-3 mt-4" v-if="alerts?.length">
         <li v-for="alert in alerts" :key="alert.alert_id"
-          class="flex items-center bg-red-600 p-3 rounded-lg hover:bg-red-500 transition-transform transform hover:scale-105 duration-200 shadow hover:shadow-lg font-mono text-sm">
-          <svg class="h-5 w-5 mr-3 text-red-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-              d="M11 14.17l-2.879-2.879a.25.25 0 01-.034-.324l.516-.856a.25.25 0 01.293-.11l.904.326a.25.25 0 01.177.226V11l2.293 2.293a1 1 0 001.414 0L15 11.707V8a1 1 0 10-2 0v1.586L10.707 7.293a1 1 0 00-1.414 0L7 9.586V7a1 1 0 10-2 0v3.879l-1.096-.394a.25.25 0 01-.177-.227l.018-.088.516-.856a.25.25 0 01.35-.11l2.538 1.862a1 1 0 001.216-.39l1.1-1.654a1 1 0 001.792-.703V3a1 1 0 112 0v5.168a1 1 0 00.812.981L16 10l2.879-2.879a1 1 0 011.415 0z">
-            </path>
-          </svg>
-          {{ alert.message }}
+          class="group flex justify-between items-center bg-red-600 p-3 rounded-lg hover:bg-red-500 transition-transform transform hover:scale-105 duration-200 shadow hover:shadow-lg font-mono text-sm relative">
+
+          <div class="flex items-center">
+            <Icon name="carbon:warning-alt-inverted-filled" class="w-6 h-6 text-red-200 mr-4" />
+            {{ alert.message }}
+
+            <!-- Timestamp -->
+            <span class="left-0 ml-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {{ new Date(alert.alert_timestamp).toLocaleString() }}
+            </span>
+          </div>
+
+          <button @click="disableAlert(alert.alert_id)" class="text-red-200 hover:text-red-100">
+            <Icon name="carbon:close-filled" class="w-6 h-6" />
+          </button>
         </li>
       </ul>
+
+      <div v-else class="text-center text-gray-500 py-10">
+        <Icon name="carbon:warning-alt-inverted-filled" class="w-16 h-16 text-gray-500 mx-auto" />
+        <p>No hay alertas recientes</p>
+      </div>
     </div>
+
 
   </div>
 </template>

@@ -4,14 +4,11 @@
             <div class="container mx-auto flex justify-between items-center">
                 <h1 class="text-3xl font-bold tracking-tight">
                     <NuxtLink to="/" class="hover:text-green-400 transition-colors duration-300">
+                        <Icon name="carbon:police" class="w-8 h-8 inline-block" />
                         Cyber-Security
                     </NuxtLink>
                 </h1>
                 <nav class="flex gap-6">
-                    <NuxtLink to="/" class="py-2 px-3 hover:bg-gray-700 rounded transition-all duration-300">
-                        <Icon name="carbon:home" class="w-6 h-6 mr-2" />
-                        Home
-                    </NuxtLink>
                     <NuxtLink to="/monitor" class="py-2 px-3 hover:bg-gray-700 rounded transition-all duration-300">
                         <Icon name="carbon:cloud-monitoring" class="w-6 h-6 mr-2" />
                         Monitor
@@ -57,7 +54,10 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
                     <!-- Links -->
                     <div>
-                        <h4 class="font-semibold mb-3">Enlaces útiles:</h4>
+                        <h4 class="font-semibold mb-3">
+                            <Icon name="carbon:link" class="w-6 h-6 inline-block" />
+                            Enlaces útiles:
+                        </h4>
                         <ul>
                             <li><a href="#" class="hover:text-blue-400">Términos y condiciones</a></li>
                             <li><a href="#" class="hover:text-blue-400">Política de privacidad</a></li>
@@ -68,24 +68,42 @@
 
                     <!-- Contact Info -->
                     <div>
-                        <h4 class="font-semibold mb-3">Contáctanos:</h4>
+                        <h4 class="font-semibold mb-3">
+                            <Icon name="carbon:location-filled" class="w-6 h-6 inline-block" />
+                            Contáctanos:
+                        </h4>
                         <ul>
-                            <li>Email: contacto@cybersecurity.com</li>
-                            <li>Tel: +123 456 7890</li>
-                            <li>123 Security St., City, Country</li>
+                            <li>
+                                <Icon name="carbon:email" class="w-6 h-6 inline-block" />
+                                Email: contacto@cybersecurity.com
+                            </li>
+                            <li>
+                                <Icon name="carbon:phone-filled" class="w-6 h-6 inline-block" />
+                                Tel: +123 456 7890
+                            </li>
+                            <li>
+                                <Icon name="carbon:ibm-vsi-on-vpc-for-regulated-industries" class="w-6 h-6 inline-block" />
+                                123 Security St., City, Country
+                            </li>
                         </ul>
                     </div>
 
                     <!-- About or Description -->
                     <div>
-                        <h4 class="font-semibold mb-3">Acerca de nosotros:</h4>
+                        <h4 class="font-semibold mb-3">
+                            <Icon name="carbon:information" class="w-6 h-6 inline-block" />
+                            Acerca de nosotros:
+                        </h4>
                         <p>Nuestro compromiso es garantizar la seguridad digital a través de soluciones innovadoras y
                             efectivas.</p>
                     </div>
 
                     <!-- Social Media and Call-to-Action -->
                     <div>
-                        <h4 class="font-semibold mb-3">Síguenos:</h4>
+                        <h4 class="font-semibold mb-3">
+                            <Icon name="carbon:hybrid-networking-alt" class="w-6 h-6 inline-block" />
+                            Síguenos:
+                        </h4>
                         <div class="flex space-x-4">
                             <a href="#" class="hover:text-blue-400 flex items-center space-x-2">
                                 <Icon name="carbon:logo-facebook" class="w-6 h-6" />
