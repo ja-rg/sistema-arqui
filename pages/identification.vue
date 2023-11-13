@@ -49,6 +49,16 @@ socket.on('official-notification', (message) => {
     const id = message.sospechosos_id; // Adjust this to the correct property in your actual message
     activeButtons.value[id] = true;
 
+    useFetch(`http://main.brazilsouth.cloudapp.azure.com:8000/log_server`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            mensaje: `Se ha notificado a un oficial sobre el sospechoso ${message.nombre}`,
+        }),
+    });
+
     setTimeout(() => {
         activeButtons.value[id] = false;
     }, 5000);

@@ -57,6 +57,15 @@ onMounted(() => {
         });
 
         sound.play();
+        useFetch(`http://main.brazilsouth.cloudapp.azure.com:8000/log_server`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                mensaje: `Se ha confirmado una alerta de seguridad`,
+            }),
+        });
     });
 });
 

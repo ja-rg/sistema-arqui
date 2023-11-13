@@ -9,7 +9,14 @@ export default {
     "./node_modules/flowbite/**/*.{js,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+
+    },
+    colors: {
+      'bubble-gum': '#ff77e9',
+      'midnight': '#121063',
+
+    }
   },
   plugins: [
     require('flowbite/plugin')
