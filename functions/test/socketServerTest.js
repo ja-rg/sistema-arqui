@@ -30,6 +30,18 @@ describe('Socket.IO server', () => {
 
         clientSocket.emit('notify-official', { msg: 'test' });
     });
-    
+
+     it('should receive the users', async function () {
+        this.timeout(5000); // Set timeout to 5000ms
+        try {
+            const response = await fetch('main.brazilsouth.cloudapp.azure.com:8000/users');
+            const logs = await response.json();
+            expect(logs).to.be.an('array');
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    );
+
 
 });
